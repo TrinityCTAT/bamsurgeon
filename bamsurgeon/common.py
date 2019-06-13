@@ -123,8 +123,9 @@ def bamtofastq(bam, picardjar, threads=1, paired=True, twofastq=False):
         cmd.append('FASTQ=' + outfq)
 
     sys.stdout.write("INFO\t" + now() + "\tconverting BAM " + bam + " to FASTQ\n")
+    sys.stdout.write("INFO\tCMD: {}\n".format(" ".join(cmd)))
     subprocess.call(cmd)
-
+    
     if outfq is not None:
         assert os.path.exists(outfq) # conversion failed
         return [outfq]

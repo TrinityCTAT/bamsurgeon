@@ -162,6 +162,7 @@ def makemut(args, hc, avoid, alignopts):
         mutfail, hasSNP, maxfrac, outreads, mutreads, mutmates = mutation.mutate(args, log, bamfile, bammate, chrom, min(mutpos_list), max(mutpos_list)+1, mutpos_list, avoid=avoid, mutid_list=mutid_list, is_snv=True, mutbase_list=mutbase_list, reffile=reffile)
 
         if mutfail:
+            logger.error("mutfail encountered")
             outbam_muts.close()
             os.remove(tmpoutbamname)
             return None
@@ -277,7 +278,7 @@ def makemut(args, hc, avoid, alignopts):
 
         if not hasSNP or args.force:
             outbam_muts.close()
-
+            
             aligners.remap_bam(args.aligner, tmpoutbamname, args.refFasta, alignopts, mutid=hapstr, paired=(not args.single), picardjar=args.picardjar, insane=args.insane)
 
             outbam_muts = pysam.Samfile(tmpoutbamname,'rb')
