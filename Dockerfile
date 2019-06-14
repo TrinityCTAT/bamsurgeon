@@ -64,6 +64,6 @@ RUN cd exonerate && autoreconf -fi && ./configure && make && make install
 RUN git clone https://github.com/adamewing/bamsurgeon.git
 RUN cd bamsurgeon && python setup.py install
 
-RUN apt-get install default-jre
+RUN apt-get install -y default-jre
 
 CMD []
